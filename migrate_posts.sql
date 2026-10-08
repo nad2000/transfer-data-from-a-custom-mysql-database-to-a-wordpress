@@ -10,7 +10,9 @@ REPLACE INTO wp_posts(
     ,to_ping, pinged, post_content_filtered
 )
 SELECT
-	EntryID+2000,	UserID+1000, DateEntered, DateEntered, Message, Title,
+	EntryID+IF(EntryID < 3127, 2000, 3500),	
+  UserID+IF( UserID< 222963, 1000, 1001),
+  DateEntered, DateEntered, Message, Title,
   'publish', 'open', 'open',
 	lower(replace(WebTitle, '_','-')), Preview,
 	DateLive, DateLive,

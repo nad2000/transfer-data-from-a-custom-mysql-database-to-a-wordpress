@@ -1,4 +1,4 @@
-﻿REM mysqldump.exe --no-create-db --no-create-info=FALSE --order-by-primary=FALSE --force=FALSE --no-data --tz-utc=TRUE --flush-privileges=FALSE --compress --extended-insert=TRUE --user=root --add-locks=TRUE --max_allowed_packet=9M --flush-logs=FALSE --dump-date=TRUE --lock-tables=TRUE --allow-keywords=TRUE --events=FALSE --databases "popstaronline" > schema.sql
+REM mysqldump.exe --no-create-db --no-create-info=FALSE --order-by-primary=FALSE --force=FALSE --no-data --tz-utc=TRUE --flush-privileges=FALSE --compress --extended-insert=TRUE --user=root --add-locks=TRUE --max_allowed_packet=9M --flush-logs=FALSE --dump-date=TRUE --lock-tables=TRUE --allow-keywords=TRUE --events=FALSE --databases "popstaronline" > schema.sql
 
 
 SET DMPCMD=mysqldump.exe --no-create-db --no-create-info=TRUE --order-by-primary=FALSE --force=FALSE --no-data=FALSE --tz-utc=TRUE --flush-privileges=FALSE --compress=FALSE --replace=FALSE --host=localhost --insert-ignore=FALSE --extended-insert=TRUE --user=root --quote-names=TRUE --hex-blob=FALSE --complete-insert=FALSE --add-locks=TRUE --port=3306 --disable-keys=TRUE --delayed-insert=FALSE --create-options=TRUE --delete-master-logs=FALSE --comments=TRUE --default-character-set=utf8 --max_allowed_packet=300M --flush-logs=FALSE --dump-date=TRUE --lock-tables=TRUE --allow-keywords=TRUE --events=FALSE "popstaronline" 
@@ -8,3 +8,6 @@ REM FOR  %%F IN (adm_account,adm_lnk_account_section,adm_section,ads_ads,audio,c
 REM FOR  %%F IN ( mba_comment_0,mba_comment_1,mba_comment_2,mba_comment_3,mba_comment_4,mba_comment_5,usr_user_0,usr_user_1) DO %DMPCMD% %%F | sed "s/\(use .*;\)/-- \1/" | sed "s/\(mba_comment\|usr_user\)_[0-5]/\1/" | bzip2 -9 >data_%%F.sql.bz2
 
 FOR  %%F IN ( mba_comment,usr_user) DO %DMPCMD% %%F | sed "s/\(use .*;\)/-- \1/" | sed "s/\(mba_comment\|usr_user\)_[0-5]/\1/" | bzip2 -9 >data_%%F.sql.bz2
+
+FOR  %%F IN ( mba_entry) DO %DMPCMD% %%F | sed "s/\(use .*;\)/-- \1/" | sed "s/\(mba_comment\|usr_user\)_[0-5]/\1/" | bzip2 -9 >data_%%F.sql.bz2
+

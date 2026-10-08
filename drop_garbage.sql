@@ -386,9 +386,12 @@ DROP TABLE IF EXISTS tps_page_2010_03_10 CASCADE;
 
 -- --
 
-CREATE INDEX usr_user_idx ON usr_user(UserId );
+create index usr_user_idx on usr_user(UserId );
 
-DELETE c FROM mba_comment AS c LEFT JOIN usr_user AS u 
-    ON u.UserId = c.UserID 
-WHERE u.UserId IS NULL OR u.Enabled!=1;
+DELETE c FROM mba_comment AS c LEFT JOIN usr_user AS u ON u.UserId = c.UserID WHERE u.UserId IS NULL OR u.Enabled!=1;
 
+
+-- delete already migrated data:
+delete FROM usr_user where UserID+1000 <= 223962;
+delete FROM mba_entry where EntryID+2000 <= 5126;
+delete FROM mba_comment where CommentID+1000 <= 567779;

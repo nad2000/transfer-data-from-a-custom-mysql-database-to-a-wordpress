@@ -16,8 +16,8 @@ REPLACE wp_comments(
 	comment_parent )
 SELECT
 	c.CommentID+1000,
-	c.EntryID+2000,
-	c.UserID+1000,
+	c.EntryID+IF( c.EntryID < 3127, 2000, 3500),
+	c.UserID+IF( c.UserID < 222963, 1000, 1001),
 	u.Username,
 	u.Email,
 	c.IP,
